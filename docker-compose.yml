@@ -1,0 +1,44 @@
+version: "3.7"
+networks:
+  fhir-network:
+    driver: bridge
+services:
+  ibm-fhir:
+    build: .
+    image: ibmcom/ibm-fhir-server
+    ports:
+      - 9443:9443
+    volumes:
+      - ./fhir-server/config:/opt/ol/wlp/usr/servers/fhir-server/config/default
+      - ./fhir-server/overrides:/opt/ol/wlp/usr/servers/fhir-server/configDropins/overrides
+    healthcheck:
+      start_period: 60s
+      interval: 10s
+      timeout: 10s
+      retries: 2
+      # https://docs.docker.com/compose/compose-file/#variable-substitution
+      test: curl --max-time 5 -v -f -k -u 'fhiruser:change-password' 'https://localhost:9443/fhir-server/api/v4/$$healthcheck'
+    networks:
+      - fhir-network
+  ibm-fhir-db:
+    image: postgres:13.1
+    env_file:
+      - .pgsql.env
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    networks:
+      - fhir-network
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - .pgadmin.env
+    ports:
+      - 8090:80
+    networks:
+      - fhir-network
+
+networks:
+  fhir-network:
+    name: fhir
