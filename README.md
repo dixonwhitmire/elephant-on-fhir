@@ -2,7 +2,7 @@
 
 This project provides an [IBM FHIR Server](https://github.com/IBM/FHIR) configured with a [PostgreSQL](https://hub.docker.com/_/postgres) database. [pgAdmin](https://www.pgadmin.org/) is included to support direct database queries.
 
-This project is best used for evaluation and development as it includes all of the default settings and credentials utlized within the IBM FHIR Server.
+This project is best used for evaluation and development as it includes all of the default settings and credentials utilized within the IBM FHIR Server distribution.
 
 ## Quickstart
 
