@@ -3,6 +3,7 @@ networks:
   fhir-network:
     driver: bridge
 services:
+  # borrowed and adapted from https://github.com/IBM/FHIR 
   ibm-fhir:
     build: .
     image: ibmcom/ibm-fhir-server
@@ -16,7 +17,6 @@ services:
       interval: 10s
       timeout: 10s
       retries: 2
-      # https://docs.docker.com/compose/compose-file/#variable-substitution
       test: curl --max-time 5 -v -f -k -u 'fhiruser:change-password' 'https://localhost:9443/fhir-server/api/v4/$$healthcheck'
     networks:
       - fhir-network
