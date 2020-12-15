@@ -36,7 +36,7 @@ Send a test request to the server. Note that FHIR Server ships with a self-signe
  curl -k -i -u 'fhiruser:change-password' 'https://localhost:9443/fhir-server/api/v4/$healthcheck'
 ```
 
-### pgAdmin Configuratin
+### pgAdmin Configuration
 
 The pgadmin web UI is available on http://localhost:8090. 
 Credentials are pgdba@email.com/change-password.
