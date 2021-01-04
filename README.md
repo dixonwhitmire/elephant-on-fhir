@@ -28,6 +28,19 @@ Use the FHIR Server's Healthcheck status to determine availability (will take at
 docker-compose ps
 ``` 
 
+### FHIR Implementation Guides (Profiles)
+
+The Elephant on FHIR docker compose configuration provides a volume mapping to support loading FHIR implementation guides/profiles. 
+```shell script
+      - ./fhir-server/userlib:/opt/ol/wlp/usr/servers/fhir-server/userlib
+```
+To load a profile, simply copy the appropriate jar file(s) to the userlib directory, prior to server startup.
+To disable a profile, simply remove the jar file(s) from the userlib directory and restart the server, if necessary. The US Core profile is enabled by default.
+
+
+For further information on implementation guide support, please consult the [IBM FHIR User Guide](https://ibm.github.io/FHIR/guides/FHIRValidationGuide#optional-profile-support).
+
+
 ### Send Requests
 
 Send a test request to the server. Note that FHIR Server ships with a self-signed certificate. The following cURL command uses the `-k` switch to disable validation.

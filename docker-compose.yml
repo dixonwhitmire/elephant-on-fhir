@@ -12,6 +12,7 @@ services:
     volumes:
       - ./fhir-server/config:/opt/ol/wlp/usr/servers/fhir-server/config/default
       - ./fhir-server/overrides:/opt/ol/wlp/usr/servers/fhir-server/configDropins/overrides
+      - ./fhir-server/userlib:/opt/ol/wlp/usr/servers/fhir-server/userlib
     healthcheck:
       start_period: 60s
       interval: 10s
